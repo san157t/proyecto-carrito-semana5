@@ -34,12 +34,11 @@ def test_agregar_producto_error_cero():
         agregar_producto(carrito, "Cuaderno", 10000.0, 0)
 
 def test_agregar_producto_inmutabilidad_en_error():
-    # El diccionario original no cambia al fallar (Escenario 2 de la historia)
+    # El diccionario original no cambia al fallar la validación
     carrito = {"items": {"Cuaderno": 1}, "total": 10000.0}
-    try:
+    with pytest.raises(ValueError, match="La cantidad debe ser mayor a cero"):
         agregar_producto(carrito, "Cuaderno", 10000.0, -2)
-    except ValueError:
-        pass
+    
     assert carrito == {"items": {"Cuaderno": 1}, "total": 10000.0}
 def test_agregar_producto_inmutabilidad_exito():
     # Validar que el .copy() funciona: un agregado exitoso no muta el original
