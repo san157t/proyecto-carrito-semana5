@@ -41,3 +41,10 @@ def test_agregar_producto_inmutabilidad_en_error():
     except ValueError:
         pass
     assert carrito == {"items": {"Cuaderno": 1}, "total": 10000.0}
+def test_agregar_producto_inmutabilidad_exito():
+    # Validar que el .copy() funciona: un agregado exitoso no muta el original
+    carrito = {"items": {"Cuaderno": 1}, "total": 10000.0}
+    resultado = agregar_producto(carrito, "Regla", 1500.0, 1)
+    
+    assert carrito == {"items": {"Cuaderno": 1}, "total": 10000.0}
+    assert resultado["items"]["Regla"] == 1
