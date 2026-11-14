@@ -56,7 +56,8 @@ def agregar_producto(
 ) -> dict:
     """Agrega un producto al carrito y devuelve un carrito nuevo.
 
-    No modifica el carrito recibido. Si el producto ya estaba, suma la cantidad.
+    No modifica el carrito recibido y conserva sus otras claves. Si el producto
+    ya estaba, suma la cantidad.
 
     Args:
         carrito: ``{"items": {producto: cantidad}, "total": float}``.
@@ -83,6 +84,7 @@ def agregar_producto(
     _validar_cantidad(cantidad)
 
     nuevo_carrito = {
+        **carrito,
         "items": carrito.get("items", {}).copy(),
         "total": carrito.get("total", 0.0),
     }
