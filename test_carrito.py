@@ -38,12 +38,14 @@ def test_agregar_producto_inmutabilidad_en_error():
     carrito = {"items": {"Cuaderno": 1}, "total": 10000.0}
     with pytest.raises(ValueError, match="La cantidad debe ser mayor a cero"):
         agregar_producto(carrito, "Cuaderno", 10000.0, -2)
-    
+
     assert carrito == {"items": {"Cuaderno": 1}, "total": 10000.0}
+
+
 def test_agregar_producto_inmutabilidad_exito():
     # Validar que el .copy() funciona: un agregado exitoso no muta el original
     carrito = {"items": {"Cuaderno": 1}, "total": 10000.0}
     resultado = agregar_producto(carrito, "Regla", 1500.0, 1)
-    
+
     assert carrito == {"items": {"Cuaderno": 1}, "total": 10000.0}
     assert resultado["items"]["Regla"] == 1
