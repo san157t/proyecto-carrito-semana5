@@ -45,3 +45,12 @@ def test_entrada_invalida_no_modifica_el_carrito_original():
         agregar_producto(CARRITO, "Regla", -5.0, 1)
 
     assert CARRITO == {"items": {"Cuaderno": 1}, "total": 10000.0}
+
+
+def test_conserva_otras_claves_del_carrito():
+    # H-08: el resultado descartaba cualquier clave distinta de items y total.
+    carrito = {"items": {}, "total": 0.0, "cupon": "DESC10"}
+
+    resultado = agregar_producto(carrito, "Pan", 10.0, 1)
+
+    assert resultado["cupon"] == "DESC10"
