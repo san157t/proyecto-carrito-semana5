@@ -149,3 +149,14 @@ cantidad en el límite (1), texto vacío y solo espacios, precio y cantidad en c
 `nan` e infinito, y tipos equivocados. Contexto local: productos y precios en
 pesos colombianos de una tienda escolar y de mercado. Los datos están en el
 fixture `catalogo_sintetico` de `tests/conftest.py`.
+#	Cambio en carrito.py	Resultado	Pruebas que fallaron
+1	Quitar if precio is None	7 fallaron, 62 pasaron	precio_none_lanza_precio_no_disponible, R3 (2), HU-02, HU-03 (2), prioridad
+2	cantidad < 0 → cantidad <= 0	3 fallaron, 66 pasaron	error_cero, cantidad_cero_lanza_value_error, R6
+3	_validar_cantidad antes que _validar_precio	3 fallaron, 66 pasaron	prioridad_precio_antes_que_cantidad, R3-gana-a-cantidad, R4-gana-a-cantidad
+4	Quitar .copy() de items	1 falló, 68 pasaron	solo inmutabilidad_exito
+
+
+
+test_precio_no_disponible_es_un_value_error no falló en la ruptura 1, porque protege la jerarquía de la excepción y no la regla del precio.
+En la ruptura 3, las pruebas de «producto gana a todo» (R2) siguieron en verde, porque no moví el producto. No probé cambiar el orden del producto, y eso queda como límite de este experimento.
+En la ruptura 4, la inmutabilidad en éxito depende de una sola prueba (test_carrito.py). Las R1 de test_casos_diseno.py no comprueban que el carrito original quede intacto.
