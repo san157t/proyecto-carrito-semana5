@@ -11,3 +11,4 @@ select = ["E", "F", "B", "S", "W"]
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules"
+pythonpath = ["."]
