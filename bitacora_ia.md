@@ -22,3 +22,47 @@ Las pruebas automatizadas me dieron seguridad para refactorizar la validación h
 | 14/11/26 | Hallazgo de IA: el carrito descarta claves distintas de `items` y `total` (H-08) | Aceptada | Es un hallazgo real (el cupón se perdía) y la corrección es de una línea sin cambiar el contrato. | Prueba primero: 1 failed (commit d865ce5). Luego `{**carrito}` y 23 pruebas en verde (commit dc12ea2). |
 
 **Agente de código:** no usé ningún agente en esta semana.
+## Semana 7: de los requisitos a las pruebas
+
+### Prompt 1
+| Ficha | Contenido |
+|---|---|
+| Número y propósito | 1. Comprobar con evidencia dos defectos entre requisitos y código |
+| Herramienta | Claude |
+| Prompt exacto | ayudame a hacer el trabajo de la seman 7|
+| Resumen de la respuesta | Me dio comandos `git grep` y `git log -S`. Primero dijo que no podía abrir el repo y luego que sí. |
+| Qué verificaste | Corrí los comandos yo. «no puede ser negativa» y «Precio no disponible» no aparecen en el código y `git log -S` salió vacío. El mensaje del código era «debe ser mayor a cero», en 3 pruebas. Leí HU-01, HU-02 y HU-03 en el documento de requisitos. |
+| Defectos encontrados | La IA contradijo lo que dijo sobre el acceso al repo. Tuve que confirmar yo cada hecho con mi terminal. |
+| Qué corregiste | Usé solo la evidencia de mi salida y del documento. |
+
+### Prompt 2
+| Ficha | Contenido |
+|---|---|
+| Número y propósito | 2. Pruebas desde las reglas del cliente (rojo) y código (verde) |
+| Herramienta | Claude |
+| Resumen de la respuesta | Propuso `tests/test_reglas_cliente.py`, dos mensajes de cantidad y `PrecioNoDisponibleError`, con el orden producto, precio, cantidad. |
+| Qué verificaste | Rojo `8b9fb2f`, luego verde `ebf15f5`. Comprobé el diff de `test_carrito.py` (solo 2 líneas) y `pytest` + `ruff`. |
+| Defectos encontrados | Trabajé primero en la carpeta equivocada (`proyecto_carrito_corregido`) y varios commits salieron con «nothing to commit». Las pruebas viejas tenían el esperado sacado del código. `test_agregar_producto_existente` no prueba un producto existente. |
+| Qué corregiste | Rehice las ediciones en el repo correcto. Decisiones que acepté: . |
+
+### Prompt 3
+| Ficha | Contenido |
+|---|---|
+| Número y propósito | 3. Pruebas de diseño de casos (paquete de la semana 7) |
+| Herramienta | Claude |
+| Resumen de la respuesta | Un zip con `conftest.py`, `test_casos_diseno.py` y `registro_pruebas.md` (commit `e58ae28`). |
+| Qué verificaste | 69 pruebas en verde. Después rompí el código a propósito (prompt 4). |
+| Defectos encontrados | Pasaron todas a la primera, así que no probaban nada hasta verlas fallar. |
+  |
+
+### Prompt 4
+| Ficha | Contenido |
+|---|---|
+| Número y propósito | 4. Romper el código a propósito |
+| Herramienta | Claude |
+| Resumen de la respuesta | 4 rupturas: quitar `if precio is None`, `<= 0`, cambiar el orden de validación y quitar `.copy()`. |
+| Qué verificaste | Resultados: 7, 3, 3 y 1 pruebas fallaron. Cada ruptura se deshizo con `git restore carrito.py`. |
+| Defectos encontrados | La IA predijo 9 fallos y fueron 7: `test_precio_no_disponible_es_un_value_error` protege la jerarquía de la excepción. La inmutabilidad en éxito depende de **una sola prueba**. No probé mover el producto. |
+| Qué corregiste | Registré todo en `registro_pruebas.md` (`bb40066`, `ac8c3b9`).
+|
+
