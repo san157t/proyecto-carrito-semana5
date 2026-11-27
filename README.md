@@ -119,28 +119,19 @@ pip-audit -r requirements-dev.txt   # vulnerabilidades en dependencias
 .
 ├── carrito.py                  # lógica y validaciones
 ├── tests/
+│   ├── conftest.py             # datos compartidos de las pruebas (semana 7)
 │   ├── test_carrito.py         # pruebas de la semana 5 (HU-01)
 │   ├── test_carrito_abuso.py   # pruebas de entradas hostiles (semana 6)
+│   ├── test_casos_diseno.py    # pruebas de diseño de casos (semana 7)
 │   └── test_reglas_cliente.py  # reglas del cliente HU-01, HU-02, HU-03 (semana 7)
+├── docs/                       # entregables de la semana 3 (.docx)
+├── .github/workflows/tests.yml # pipeline de GitHub Actions (pytest y ruff)
 ├── pyproject.toml              # configuración de ruff y pytest
 ├── requirements-dev.txt        # herramientas con versión fijada
 ├── .env.example                # plantilla de variables de entorno (vacía)
 ├── bitacora_ia.md              # bitácora de uso de IA
+├── registro_pruebas.md         # registro de pruebas y de las 4 rupturas (semana 7)
 ├── revision_seguridad.md       # informe de revisión de código y seguridad
 ├── LICENSE                     # licencia MIT
 └── README.md
 ```
-
-## 7. Uso de IA
-
-Usé un asistente de IA para proponer pruebas, borradores de la implementación y del
-refactor, y como segunda revisión de seguridad. Cada propuesta se verificó antes de
-aceptarla: ejecutando las pruebas, el linter y comandos que reproducen cada hallazgo.
-Las decisiones, con su razón y verificación, están en
-[`bitacora_ia.md`](bitacora_ia.md); los hallazgos y su clasificación en
-[`revision_seguridad.md`](revision_seguridad.md).
-
-## 8. Autor y licencia
-
-Santiago Alarcón Alarcón. Proyecto académico del seminario de IA generativa.
-Licencia: MIT (ver el archivo [`LICENSE`](LICENSE)).
