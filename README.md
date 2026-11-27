@@ -135,3 +135,16 @@ pip-audit -r requirements-dev.txt   # vulnerabilidades en dependencias
 ├── LICENSE                     # licencia MIT
 └── README.md
 ```
+## 7. Uso de IA
+
+Usé un asistente de IA para proponer pruebas, borradores de la implementación y del
+refactor, y como segunda revisión de seguridad. Cada propuesta se verificó antes de
+aceptarla: ejecutando las pruebas, el linter y comandos que reproducen cada hallazgo.
+Las decisiones, con su razón y verificación, están en
+[`bitacora_ia.md`](bitacora_ia.md); los hallazgos y su clasificación en
+[`revision_seguridad.md`](revision_seguridad.md).
+
+## 8. Autor y licencia
+
+Santiago Alarcón Alarcón. Proyecto académico del seminario de IA generativa.
+Licencia: MIT (ver el archivo [`LICENSE`](LICENSE)).
