@@ -55,7 +55,7 @@ Las pruebas automatizadas me dieron seguridad para refactorizar la validación h
 |---|---|
 | Número y propósito | 3. Pruebas de diseño de casos (paquete de la semana 7) |
 | Herramienta | Claude |
-| Prompt exacto | ESCRIBE AQUÍ TU MENSAJE REAL |
+| Prompt exacto | ayudame a verificar las pruebas |
 | Resumen de la respuesta | Un zip con `conftest.py`, `test_casos_diseno.py` y `registro_pruebas.md` (commit `e58ae28`). |
 | Qué verificaste | 69 pruebas en verde. Después rompí el código a propósito (prompt 4). |
 | Defectos encontrados | Pasaron todas a la primera, así que no probaban nada hasta verlas fallar. |
@@ -67,12 +67,12 @@ Las pruebas automatizadas me dieron seguridad para refactorizar la validación h
 |---|---|
 | Número y propósito | 4. Romper el código a propósito |
 | Herramienta | Claude |
-| Prompt exacto | ESCRIBE AQUÍ TU MENSAJE REAL |
+| Prompt exacto | ayudame a encontrar los fallos |
 | Resumen de la respuesta | 4 rupturas: quitar `if precio is None`, `<= 0`, cambiar el orden de validación y quitar `.copy()`. |
 | Qué verificaste | Resultados: 7, 3, 3 y 1 pruebas fallaron. Cada ruptura se deshizo con `git restore carrito.py`. |
 | Defectos encontrados | La IA predijo 9 fallos y fueron 7: `test_precio_no_disponible_es_un_value_error` protege la jerarquía de la excepción. La inmutabilidad en éxito depende de **una sola prueba**. No probé mover el producto. |
 | Qué corregiste | Registré todo en `registro_pruebas.md` (`bb40066`, `ac8c3b9`). |
 
-**`crear_historial.sh`:** ESCRIBE AQUÍ qué era y si generó commits.
+**`crear_historial.sh`:**si generó commits.
 
-**Reflexión final:** ESCRIBE AQUÍ con tus palabras qué te ayudó y qué no de la IA esta semana.
+**Reflexión final:** la ia me ayudo mucho con el control de las prubeas y los fallos.
